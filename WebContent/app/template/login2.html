@@ -1,0 +1,68 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!--style="background:rgb(177,222,246);"-->
+<!--222222222222222222222222222222222222222222222222登录后的页面-->
+<xheader></xheader>
+<div class="logonregister" style="background:linear-gradient(to bottom,rgb(87,184,252),rgb(132,203,253));">
+		<span><img style="width: 10rem;height: 5rem;" src="img/baisexueyuanlogo.png"/><span><img style="width: 99%;height: 30%;" src="img/xiaoxun.png" alt="" /></span></span>
+		<article style="background:linear-gradient(to bottom,rgb(138,200,248),rgb(138,200,240));" class="loginregister">
+			<div>
+				<div style="background:linear-gradient(to bottom,rgb(103,191,252),rgb(138,200,248));" class="weui-cells weui-cells_form" style="margin-top: 2.176471em;">
+					<div class="weui-cell">
+						<div class="weui-cell__hd"><label  class="weui-label login2label"><span style="width: 50px;height: 50px;" src="img/1.gif" alt="" ><img style="width: 70px;height:70px;border-radius: 100%;border: 2px solid white;" src="img/qw.jpg"/></span></label></div>
+						<div class="weui-cell__bd">
+							<span class="login2size">{{loginusername}}</span>
+						</div>
+					</div>
+					<div class="weui-cell">
+						<div class="weui-cell__hd"><label  class="weui-label login2label">手机号:</label></div>
+						<div class="weui-cell__bd">
+							<span>{{phone}}</span>
+						</div>
+					</div>
+					<div class="weui-cell">
+						<div class="weui-cell__hd"><label  class="weui-label login2label">上次登录: </label></div>
+						<div class="weui-cell__bd">
+							<span>{{logintimer}}</span>
+						</div>
+					</div>
+					<div class="weui-cell">
+						<div id="repassw" class="weui-cell__hd"><label ng-click="xiugaipass()" class="weui-label login2label">修改密码？</label></div>
+						<div class="weui-cell__bd bo" ng-show="isxgpass">
+							
+							<span><input  ng-model="passwords" class="weui-input weui-password bp" type="text" placeholder="请输入新密码" style="width: 120px;"/></span>
+							<span class="tijiaonewpass" ng-click="repassw()">提交</span>
+						</div>
+					</div>
+				</div>
+				
+				<div class="weui-btn-area">
+					<a ng-click="tuchulogin()" class="weui-btn weui-btn_primary tuichudl" id="showTooltips">退出登录</a>
+				</div>
+			</div>
+		</article>
+		<div ui-view=""></div>
+		<style type="text/css">
+		       .weui-cell .bp{
+		       	  width: 15rem;
+		       }
+		      .weui-cell .tijiaonewpass{
+			     	color:#666666;
+			     	  font-weight: 600;
+		       }
+			   .weui-cell__hd .login2label{
+			     	  text-align: right;
+			     	  color:#666666;
+			     	  font-weight: 600;
+			     }
+			    .weui-btn-area .tuichudl{
+			     	  font-weight: 600;
+			     }
+		</style>
+</body>
+</html>

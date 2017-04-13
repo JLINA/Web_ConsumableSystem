@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hwua.dao.MaterialMapperDao" >
+  <resultMap id="BaseResultMap" type="com.hwua.pojo.Material" >
+    <id column="ID" property="id" javaType="java.lang.Long" />
+    <result column="NUMBERS" property="numbers" javaType="java.lang.String" />
+    <result column="TYPEID" property="typeid" javaType="java.lang.String" />
+    <result column="NAME" property="name" javaType="java.lang.String" />
+    <result column="TYPE" property="type" javaType="java.lang.String" />
+    <result column="STANDSTANDARD" property="standstandard" javaType="java.lang.String" />
+    <result column="PRICE" property="price" javaType="java.lang.Double" />
+    <result column="FACTORY" property="factory" javaType="java.lang.String" />
+    <result column="LEAVEFACTORYDATE" property="leavefactorydate" javaType="java.lang.String" />
+    <result column="BUYDATE" property="buydate" javaType="java.lang.String" />
+    <result column="INDATE" property="indate" javaType="java.lang.String" />
+    <result column="PLACE" property="place" javaType="java.lang.String" />
+    <result column="USESITUATION" property="usesituation" javaType="java.lang.String" />
+    <result column="COUNT" property="count" javaType="java.lang.Long"/>
+    <result column="SURPLUS" property="surplus" javaType="java.lang.Long" />
+    <result column="IMAGE" property="image" javaType="java.lang.String" />
+    <result column="REMARKS" property="remarks" javaType="java.lang.String" />
+  </resultMap>
+  <update id="updatesurplus" parameterType="com.hwua.pojo.Inputcount">
+    update MATERIAL
+    set
+    COUNT=#{count}, SURPLUS=#{surplus}
+    where ID = #{id,javaType=java.lang.Long}
+   </update>
+    
+   <sql id="Base_of" >
+    <if test="numbers !=null and numbers !=''">, NUMBERS = #{numbers}</if>
+    <if test="typeid !=null and typeid !='' ">, TYPEID = #{typeid} </if>
+    <if test="name !=null and name !='' ">, NAME = #{name} </if>
+    <if test="type !=null and type !='' ">, TYPE = #{type} </if>
+    <if test="standstandard !=null and standstandard !='' ">, STANDSTANDARD = #{standstandard} </if>
+     <if test="price !=null and price !='' and price !=0"> , PRICE=#{price}</if>
+    <if test="factory !=null and factory !='' ">, FACTORY = #{factory} </if>
+    <if test="leavefactorydate !=null and leavefactorydate !='' ">, LEAVEFACTORYDATE = #{leavefactorydate} </if>
+    <if test="buydate !=null and buydate !='' ">, BUYDATE = #{buydate} </if>
+    <if test="indate !=null and indate !=''">, INDATE=#{indate}</if>
+    <if test="place !=null and place !='' ">, PLACE = #{place}</if>
+     <if test="usesituation !=null and usesituation !='' ">, USESITUATION = #{usesituation}</if>
+    <if test="count !=null and count !='' and count !=0">, COUNT = #{count} </if>
+    <if test="surplus !=null and surplus !='' and surplus !=0"> , SURPLUS=#{surplus}</if>
+    <if test="image !=null and image !='' ">, IMAGE = #{image}</if>
+    <if test="remarks !=null and remarks !='' ">, REMARKS = #{remarks}</if>
+  </sql> 
+  
+  <sql id="Base_if">
+    <if test="1 == 1"> where 1=1</if>
+    <if test="numbers != null and numbers != ''">and NUMBERS LIKE '%${numbers}%'</if>
+    <if test="typeid != null and typeid != ''">and TYPEID LIKE '%${typeid}%'</if>
+    <if test="name != null and name != ''">and NAME LIKE '%${name}%'</if>
+    <if test="type != null and type != '' ">and TYPE LIKE '%${type}%'</if>
+    <if test="standstandard != null and standstandard != '' ">and STANDSTANDARD LIKE '%${standstandard}%'</if>
+    <if test="price != null and price != '' and price != 0">and PRICE=#{price}</if>
+    <if test="factory != null and factory != '' ">and FACTORY LIKE '%${factory}%'</if>
+    <if test="leavefactorydate != null and leavefactorydate != '' ">and LEAVEFACTORYDATE LIKE '%${leavefactorydate}%'</if>
+    <if test="buydate != null and buydate != '' ">and BUYDATE LIKE '%${buydate}%'</if>
+    <if test="indate != null and indate != '' ">and INDATE LIKE '%${indate}%'</if>
+    <if test="place != null and place != '' ">and PLACE LIKE '%${place}%'</if>
+    <if test="usesituation != null and usesituation != '' ">and USESITUATION LIKE '%${usesituation}%'</if>
+    <if test="price != null and price != '' and count != 99999999 ">and COUNT=#{count}</if>
+    <if test="price != null and price != '' and surplus != 99999999 ">and SURPLUS=#{surplus}</if>
+    <if test="image != null and image != '' ">and IMAGE LIKE '%${image}%'</if>
+    <if test="remarks != null and remarks != '' ">and REMARKS LIKE '%${remarks}%'</if>
+  
+  </sql>
+  <sql id="ifs">
+  <if test="1 == 1"> where 1=1</if>
+  <if test="type !=null and type !=''">and TYPEID = #{type}</if>
+  <if test="place !=null and place !=''">and PLACE = #{place}</if>
+  <if test="str != null and str != ''">and (NUMBERS LIKE '%${str}%' or NAME LIKE '%${str}%')</if>
+  <if test="(stprice !=null)or(endprice !=null)">and (PRICE between #{stprice} and #{endprice}) </if>
+  </sql>
+  <select id="selectsy" parameterType="com.hwua.pojo.SelectAll" resultMap="BaseResultMap">
+  select <include refid="Base_Column_List"/>
+  from(
+  select a1.*, rownum rwn from (SELECT * FROM MATERIAL <include refid="ifs"/>) a1   
+   where  rownum<![CDATA[ <=]]>  #{max}) 
+   where rwn &gt; #{min}
+  </select>
+  
+  <select id="selectbytypeids" parameterType="com.hwua.pojo.Types" resultMap="BaseResultMap">
+  select <include refid="Base_Column_List"/>
+  from(
+  select a1.*, rownum rwn from (SELECT * FROM MATERIAL WHERE TYPEID=(SELECT TYPEID FROM TYPES WHERE TYPEIDS=#{typeids})) a1   
+   where  rownum<![CDATA[ <=]]>  #{max}) 
+   where rwn &gt; #{min}
+  </select>
+  
+  <select id="selectcountsy" parameterType="com.hwua.pojo.SelectAll" resultType="java.lang.Integer">
+   SELECT count(*) FROM MATERIAL <include refid="ifs"/>  
+   
+  </select>
+  <sql id="Base_Column_List" >
+  ID, NUMBERS, TYPEID, NAME, TYPE, STANDSTANDARD, PRICE, FACTORY, LEAVEFACTORYDATE, BUYDATE, INDATE, 
+  PLACE, USESITUATION, COUNT, SURPLUS,IMAGE,REMARKS</sql>
+ 
+ <select id="select" parameterType="com.hwua.pojo.Material" resultMap="BaseResultMap">
+  select <include refid="Base_Column_List"/>
+  from(
+  select a1.*, rownum rwn from (SELECT * FROM MATERIAL <include refid="Base_if"/>) a1   
+   where  rownum<![CDATA[ <=]]>  #{max}) 
+   where rwn &gt; #{min}
+  </select>
+
+ <select id="selectcount" parameterType="com.hwua.pojo.Material" resultType="java.lang.Integer">
+   SELECT count(*) FROM MATERIAL <include refid="Base_if"/>  
+   
+  </select>
+   
+   <select id="selectone" parameterType="java.lang.Long" resultType="com.hwua.pojo.Material">
+   select <include refid="Base_Column_List"/>
+   from
+   MATERIAL where ID=#{id}
+   </select>
+   
+   <update id="updateone" parameterType="com.hwua.pojo.Material" >
+   update MATERIAL
+    set
+    ID=#{id}
+    <include refid="Base_of"/>
+     where ID = #{id,javaType=java.lang.Long}
+   </update> 
+   <delete id="delete" parameterType="java.lang.Long">
+   DELETE FROM MATERIAL WHERE ID=#{id}
+   </delete>
+   
+   <insert id="insert" parameterType="com.hwua.pojo.Material">
+   <selectKey keyColumn="id" keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+ 		select MATERIAL_SQL.nextval from dual
+ 	</selectKey>
+ 	insert into MATERIAL(<include refid="Base_Column_List"/>)
+    values(
+    #{id},#{numbers},#{typeid},#{name},#{type},#{standstandard},#{price},#{factory},#{leavefactorydate},#{buydate},#{indate}
+    ,#{place},#{usesituation},#{count},#{surplus},#{image},#{remarks}
+    )
+   </insert>
+   
+   <select id="export" parameterType="com.hwua.pojo.Execlimp" resultMap="BaseResultMap">
+   select <include refid="Base_Column_List"/>
+   from
+   MATERIAL <include refid="ifl"/>   
+   </select>
+   
+ <sql id="ifl">
+  <if test="1 == 1"> where 1=1</if>
+  <if test="type !=null and type !=''">and TYPEID = #{type}</if>
+  <if test="place !=null and place !=''">and PLACE = #{place}</if>
+  <if test="str != null and str != ''">and (NUMBERS LIKE '%${str}%' or NAME LIKE '%${str}%')</if>
+  <if test="(stprice !=null)or(endprice !=null)">and (PRICE between #{stprice} and #{endprice}) </if>
+  </sql>
+</mapper>

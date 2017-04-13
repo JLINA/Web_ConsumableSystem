@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         
+         xmlns="http://java.sun.com/xml/ns/javaee" 
+         
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" 
+         
+         id="WebApp_ID" version="3.0">
+  
+  <display-name>Web_ConsumableSystem</display-name>
+  
+  <context-param>
+
+        <param-name>spring.profiles.active</param-name> 
+        <param-value>dev</param-value> 
+    </context-param> 
+    <context-param> 
+        <param-name>spring.profiles.default</param-name> 
+        <param-value>dev</param-value> 
+    </context-param>
+    <context-param> 
+        <param-name>spring.liveBeansView.mbeanDomain</param-name> 
+        <param-value>dev</param-value> 
+    </context-param>
+  
+  <welcome-file-list>
+  
+    <welcome-file>index.html</welcome-file>
+    
+    <welcome-file>index.htm</welcome-file>
+    
+    <welcome-file>index.jsp</welcome-file>
+    
+    <welcome-file>default.html</welcome-file>
+    
+    <welcome-file>default.htm</welcome-file>
+    
+    <welcome-file>default.jsp</welcome-file>
+    
+  </welcome-file-list>
+  
+  <listener>
+  
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    
+  </listener>
+  
+  
+
+  <context-param>
+  
+    <param-name>contextConfigLocation</param-name>
+    
+    <param-value>classpath:applicationContext.xml</param-value>
+    
+  </context-param>
+ 
+  <context-param>
+   <param-name>webAppRootKey</param-name>
+   <param-value>webName.root</param-value>
+   </context-param>
+   
+   <context-param>  
+        <param-name>webAppRootKey</param-name>   
+        <param-value>evan.webapp</param-value>  
+    </context-param>  
+    <listener>   
+        <listener-class>org.springframework.web.util.WebAppRootListener</listener-class>   
+    </listener>
+  
+  <listener>   
+        <listener-class>org.springframework.web.util.WebAppRootListener</listener-class>   
+   </listener>
+  
+  <servlet>
+  
+  	<servlet-name>springmvc</servlet-name>
+  	
+  	<servlet-class>
+  	
+  		org.springframework.web.servlet.DispatcherServlet
+  		
+  	</servlet-class>
+  	
+  	<!-- 初始化参数 加载springmvc的配置文件 
+  		实际上就是一个spring的配置文件 
+  		classpath src下的文件路径-->
+  		
+  	<init-param>
+  	
+  		<param-name>contextConfigLocation</param-name>
+  		
+    	<param-value>classpath:springmvc.xml</param-value>
+    	
+  	</init-param>
+  	
+  	<!-- 需要启动项目的时候就加载配置文件，初始化servlet -->
+  	
+  	<load-on-startup>1</load-on-startup>
+  	
+  </servlet>
+  
+  
+  <servlet-mapping>
+  
+  	<servlet-name>springmvc</servlet-name>
+  	
+  	<!--url-pattern 代表是是么样的请求交给spring去处理
+  		/ 代表是所有的请求  -->
+  		
+  	<url-pattern>*.do</url-pattern>
+  	
+  	
+  </servlet-mapping>
+  
+    
+  
+  <filter>
+  
+  	<filter-name>springEncoding</filter-name>
+  	
+  	<filter-class>
+  	
+  	    org.springframework.web.filter.CharacterEncodingFilter
+  	
+  	</filter-class>
+  	
+  	<init-param>
+  	
+  		<param-name>encoding</param-name>
+  		
+  		<param-value>UTF-8</param-value>
+  		
+  	</init-param>
+  	
+  </filter>
+  
+  <filter-mapping>
+  
+  	<filter-name>springEncoding</filter-name>
+  	
+  	<url-pattern>/*</url-pattern>
+  	
+  </filter-mapping>
+  
+  
+  
+</web-app>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hwua.dao.UsersMapperDao" >
+  <resultMap id="BaseResultMap" type="com.hwua.pojo.Users" >
+    <id column="ID" property="id" javaType="java.lang.Long" />
+    <result column="USERNAME" property="username" javaType="java.lang.String" />
+    <result column="PASSWORD" property="password" javaType="java.lang.String" />
+    <result column="ROLE" property="role" javaType="java.lang.String" />
+    <result column="PHONE" property="phone" javaType="java.lang.String" />
+    <result column="CREATETIME" property="createtime" javaType="java.lang.String" />
+    <result column="LASTTIME" property="lasttime" javaType="java.lang.String" />
+    <result column="STATE" property="state" javaType="java.lang.String" />
+  </resultMap>
+  <update id="update" parameterType="com.hwua.pojo.Users">
+  update USERS
+    set
+    ID=#{id}
+    <include refid="Base_of"/>
+     where ID = #{id,javaType=java.lang.Long}
+  </update>
+  <sql id="Base_of" >
+    <if test="username!=null and username!=''">, USERNAME =#{username}</if>
+    <if test="password!=null and password!=''">, PASSWORD = #{password} </if>
+    <if test="role!=null and role !=''"> , ROLE=#{role}</if>
+    <if test="phone!=null and phone !=''">, PHONE=#{phone}</if>
+    <if test="createtime!=null and createtime !='' ">, CREATETIME = #{createtime}</if>
+    <if test="lasttime!=null and lasttime !='' ">, LASTTIME = #{lasttime}</if>
+    <if test="state !=null and state !='' ">, STATE = #{state}</if>
+  </sql>
+  
+  <delete id="delete" parameterType="java.lang.Long">
+  DELETE FROM USERS WHERE ID=#{id}
+  </delete> 
+  <insert id="insert" parameterType="com.hwua.pojo.Users">
+  <selectKey keyColumn="id" keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+ 		select USERS_SEQ.nextval from dual
+ 	</selectKey>
+ 	insert into USERS(ID,USERNAME, PASSWORD, ROLE,PHONE,CREATETIME,LASTTIME,STATE)
+    values(
+    #{id},#{username},#{password},#{role},#{phone},#{createtime},#{lasttime},#{state}
+    )
+  </insert>
+  
+  
+  <!-- 查找 -->
+  <sql id="Base_List">
+  ID, USERNAME, PASSWORD, ROLE,PHONE,CREATETIME,LASTTIME,STATE
+  </sql>
+   
+   <select id="select" parameterType="com.hwua.pojo.SelectAll" resultMap="BaseResultMap">
+  
+  select <include refid="Base_List"/>
+  from(
+  select a1.*, rownum rwn from (SELECT * FROM USERS  <include refid="Base_if"/>) a1   
+   <include refid="if1"></include>) 
+    <include refid="if2"></include>
+  </select>
+  <sql id="if1">
+  <if test="max !=null and max !='' and max !=0">where  rownum<![CDATA[ <=]]>  #{max}</if>
+  </sql>
+  <sql id="if2">
+  <if test="max !=null and max !='' and max !=0">where rwn &gt; #{min}</if>
+  </sql>
+   <sql id="Base_if" >
+   <if test="str !=null and str !='' ">
+    where USERNAME LIKE '%${str}%' or STATE LIKE '%${str}%' or ROLE LIKE '%${str}%'
+    </if> 
+  </sql>
+  <select id="selectcount" parameterType="com.hwua.pojo.SelectAll" resultType="java.lang.Long">
+  SELECT count(*) FROM USERS <include refid="Base_if"/>
+  </select>
+  
+  <select id="selectbyid" parameterType="java.lang.Long" resultType="com.hwua.pojo.Users">
+  SELECT <include refid="Base_List"/> FROM USERS WHERE ID=#{ID}
+  </select>
+  
+  <select id="se" resultMap="BaseResultMap">
+    select <include refid="Base_List"/>
+  from
+  USERS  
+  </select>
+</mapper>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<xheader></xheader>
+<!--2222222222222222222222222222222222222222222222超级管理员的页面-->
+<div>
+		<table border="0" cellspacing="0" cellpadding="0" class="data_size tablebj1">
+				<tr>
+					 <td ng-click="glysc(glydata.id)">删除</td>
+					 <td ng-click="rspassword()">重置密码</td>
+					 <td ng-click="fquanx()">赋予权限</td>
+					 <td ng-click="squanx()">收回权限</td>
+					 <td ng-click="dongj()">冻结</td>
+					 <td ng-click="jdong()">解冻</td>
+				</tr>
+			</table>
+			<!--添加和搜索部分-->
+			<div>
+				<p class="data_nav">
+						<span><input class="sinput1" type="search" id="input5" placeholder="请输入查询内容" ng-model="searchName" ng-focus="search()"/></span>
+						<span class="data_navsearchcj" ng-click="searcher()">搜       索<span>	
+			    </p>
+			</div>
+			
+			<table border="0" cellspacing="0" cellpadding="0" class="data_size tablebj1">
+				<th>选中</th>
+				<th>序号</th>
+				<th>用户名</th>
+				<th>密码</th>
+				<th>使用状态</th>
+				<th>详情</th>
+					<!--在数据库里查询-->
+					<!--<tr ng-click="ttt(glydata.id)" ng-repeat="glydata in glydatas" id="superishide{{glydata.id}}">-->
+					
+					<tr ng-repeat="glydata in glydatas" id="superishide{{glydata.id}}">
+						<td><input type="checkbox"  name="check" value="{{glydata.id}}" /></td>
+						<td>{{glydata.id}}</td>
+						<td>{{glydata.username}}</td>
+						<td>{{glydata.password}}</td>
+						<td>{{glydata.state}}</td>
+						<td ><a ng-href="#/mainpage/superxq/{{glydata.id}}">详情</a></td>
+					</tr>
+					
+			</table>
+			<!--分页-->
+			<div class="turnPage">
+			<!--	<span ng-click="fisrt()">首页</span>-->
+			    <span ng-click="previous()">上一页</span>
+			    <span ng-click="next()">下一页</span> 
+			    <input type="number" ng-model="currentPages" class="pageNum" value="" />
+			    <!--<input type="text" ng-model="currentPage" class="pageNum">-->
+			    <span ng-click="goToPage()">跳转</span>
+			    <span> 第<span id="xx2"> </span>页</span>
+			    <span class="totalPages">共{{allPage}}页</span>
+			</div>
+   </div>
+    <div ui-view=""></div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!--<!DOCTYPE html>
+<html ng-app="dataApp">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+		<title></title>
+	</head>
+	 <body>-->	
+	            <xheader></xheader>	
+	            <!--------------------普通用户的界面-->
+	            <div ng-show="isptgl">
+	                      <img style="width:100%;height:4rem;" src="img/banebar00.jpg"/>
+	            </div>
+				<!---------------------ng-show="cjgly"区分超级管理员还是管理员---------------超级管理员和管理员的界面-->
+				<div ng-hide="isptgl">
+				    <span style="font-size:2rem;font-weight: 600;">历史记录</span>
+					<!--数据表格的部分-->
+					<table border="0." cellspacing="0" cellpadding="0" style=" width: 100%;font-size:0.8rem;color: #454545; margin-top: 1rem;text-align: center;">
+						<th class="aa">序号</th>
+						<th class="aa">用户名</th>
+						<th class="aa">操作</th>
+						<th class="aa">操作对象</th>
+						<th class="aa">操作时间</th>
+							<!--在数据库里查询-->
+							<tr ng-repeat="detaildata in detaildatas" class="aa">
+								<td class="aa">{{detaildata.id}}</td>
+								<td>{{detaildata.user.username}}</td>
+								<td>{{detaildata.operate}}</td>
+								<td>{{detaildata.operateobject}}</td>
+								<td>{{detaildata.times}}</td>
+							</tr>
+					</table>
+					<!--分页-->
+					<div class="turnPage">
+					<!--	<span ng-click="fisrt()">首页</span>-->
+					    <span ng-click="previous()">上一页</span>
+					    <span ng-click="next()">下一页</span> 
+					    <input type="number" ng-model="currentPage" class="pageNum" value="" />
+					    <!--<input type="text" ng-model="currentPage" class="pageNum">-->
+					    <span ng-click="goToPage()">跳转</span>
+					    <span> 第<span id="zz"> </span>页</span>
+					    <span class="totalPages" >共{{allPages}}页</span>
+					</div>
+				</div>
+				
+		</div>
+		
+	<!--</body>
+</html>-->

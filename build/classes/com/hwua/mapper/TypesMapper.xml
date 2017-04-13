@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hwua.dao.TypesMapperDao" >
+  <resultMap id="BaseResultMap" type="com.hwua.pojo.Types" >
+    <id column="TYPEID" property="typeid" javaType="java.lang.String" />
+    <result column="TYPEIDS" property="typeids" javaType="java.lang.String" />
+  </resultMap>
+  <sql id="base">TYPEID,TYPEIDS</sql>
+ <insert id="insert" parameterType="com.hwua.pojo.Types">
+   insert into TYPES(<include refid="base"/>) values( #{typeid},#{typeids}) 
+ </insert>
+ <select id="select" parameterType="com.hwua.pojo.Types" resultMap="BaseResultMap">
+ SELECT <include refid="base"/> from TYPES <include refid="baseif"/>
+ </select>
+ <sql id="baseif"> 
+ <if test="typeids !=null and typeids !='' ">WHERE TYPEIDS=#{typeids}</if>
+ </sql>
+</mapper>

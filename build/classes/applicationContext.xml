@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	
+	xmlns:p="http://www.springframework.org/schema/p"
+
+	xmlns:context="http://www.springframework.org/schema/context"
+	
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	
+	http://www.springframework.org/schema/context
+	
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	
+	http://www.springframework.org/schema/aop 
+	
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+	
+	http://www.springframework.org/schema/mvc 
+	
+    http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+    
+    http://www.springframework.org/schema/tx 
+    
+    http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+    
+    <context:component-scan base-package="com.hwua.controller"/>
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+	
+		<property name="driverClass" value="oracle.jdbc.OracleDriver" />
+		
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe" />
+		
+		<property name="user" value="infomat" />
+		
+		<property name="password" value="infomat" />
+		
+		<!-- 初始化连接数 -->
+		
+		<property name="initialPoolSize" value="5" />
+		
+		<!-- 最小连接数 -->
+		
+		<property name="minPoolSize" value="2" />
+		
+		<!-- 最大连接数 -->
+		
+		<property name="maxPoolSize" value="10" />
+		
+		<!-- 最大空闲时间 -->
+		
+		<property name="maxIdleTime" value="1000" />
+		
+	</bean>
+
+	<!-- 2.sqlSessionFactory 相当于mybatis的配置文件 -->
+	<!-- sqlSessionFactory的bean 才能实现注入功能 需要dataSource的注入 -->
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	
+		<property name="dataSource" ref="dataSource" />
+		
+		<!-- mapper.xml的位置 scr路径下的mapper的位置 * 代表所有的mapper.xml -->
+		
+		<property name="mapperLocations" value="classpath:com/hwua/mapper/*.xml" />
+		
+	</bean>
+
+	<!-- 3.可以使用sqlSession -->
+	
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+	
+		<constructor-arg ref="sqlSessionFactory" />
+		
+	</bean>
+
+	<!-- 4.mapper文件的路径 -->
+	
+	<!-- 扫描mapper的basePackage -->
+	
+	<bean id="MapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	
+		<property name="basePackage" value="com.hwua.mapper" />
+		
+	</bean>
+	
+	<!-- 5.事务管理配置 -->
+	<!--事务管理器 属性是dataSource -->
+	
+	<bean id="transactionManager"
+	
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		
+		<property name="dataSource" ref="dataSource" />
+		
+	</bean>
+	
+	<!-- 6.可以用注解方式配置事务 -->
+	<!-- 使用全注释事务 -->
+	
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<!-- 6个步骤完成了spring与mybatis的整合 -->
+	<bean id="userService" class="com.hwua.service.UserService"/>
+	
+	<bean id="materialService" class="com.hwua.service.MaterialService"/>
+	
+	<bean id="historyService" class="com.hwua.service.HistoryService"/>
+	
+	<bean id="typesService" class="com.hwua.service.TypesService"/>
+	
+	<bean id="placesService" class="com.hwua.service.PlacesService"/>
+	
+	
+	
+	
+
+</beans>

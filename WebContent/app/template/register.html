@@ -1,0 +1,70 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<xheader></xheader>
+<div class="logonregister">
+		<div class="weui-tab">
+			<div class="weui-navbar weui-fixed">
+				<div class="weui-navbar__item weui-bar__item_on">
+					<a class="weui-a logreg">注册</a>
+				</div>
+			</div>
+			<div class="weui-tab__panel">
+		
+			</div>
+		</div>
+		<article class="loginregister">
+			<section>
+				<!--利用真假来给div添加class-->
+				<div ng-click="show(1)" ng-class="{'border':page1}"><a class="lorresize" href="#/mainpage/login">用户登录</a></div>
+				<div ng-click="show(2)" ng-class="{'border':page2}"><a class="lorresize" href="#/mainpage/register">用户注册</a></div>
+			</section>
+		<div>
+				<div class="weui-cells weui-cells_form fontsize" style="margin-top: 2.176471em;">
+					<div class="weui-cell">
+						<div class="weui-cell__hd"><label ng-class="{'inputcolor':boolname}" class="weui-label textright">账号</label></div>
+						<div class="weui-cell__bd">
+							<input ng-model="username" ng-class="{'inputborder':boolname}" class="weui-input" type="text" placeholder="用户名为4到10个字母">
+						</div>
+					</div>
+					<div class="weui-cell">
+						<div class="weui-cell__hd"><label ng-class="{'inputcolor':boolpassword1}" class="weui-label textright">密码</label></div>
+						<div class="weui-cell__bd">
+							<input ng-model="password1" ng-class="{'inputborder':boolpassword1}" class="weui-input weui-password" type="password" placeholder="密码为字符或字母6-12位">
+						</div>
+					</div>
+					<div class="weui-cell">
+						<div class="weui-cell__hd"><label ng-class="{'inputcolor':boolpassword2}" class="weui-label textright">确认密码</label></div>
+						<div class="weui-cell__bd">
+							<input ng-model="password2" ng-class="{'inputborder':boolpassword2}" class="weui-input weui-password" type="password" placeholder="请确认密码">
+						</div>
+					</div>
+					<div class="weui-cell">
+						<div class="weui-cell__hd"><label ng-class="{'inputcolor':boolnumber}" class="weui-label textright">手机号</label></div>
+						<div class="weui-cell__bd">
+							<input ng-model="phone" ng-class="{'inputborder':boolnumber}" class="weui-input weui-password" type="number" placeholder="手机号为11位数字">
+						</div>
+					</div>
+					<div class="weui-cell">
+						<div class="weui-cell__hd"><label ng-class="{'inputcolor':code1}" class="weui-label textright">验证码</label></div>
+						<div class="weui-cell__bd">
+							<input ng-model="code" ng-class="{'inputcolor':code1}" class="weui-input weui-password" type="text" placeholder="验证码为小写字母">
+						</div>
+					</div>
+					<div class="weui-cell">
+						<!--src的地址放后台的接口-->
+					    <img id="imgId" ng-click="newcode()"  alt="" />
+					    <span><a href="#" ng-click="newcode()" style="font-size: 1.2rem;">看不清楚？换另一张</a></span>
+					</div>
+				</div>
+				<div class="weui-btn-area">
+					<a ng-click="register()" class="weui-btn weui-btn_primary" id="showTooltips">注册</a>
+				</div>
+			</div>
+</div>
+</body>
+</html>

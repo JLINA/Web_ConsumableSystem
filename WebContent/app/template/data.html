@@ -1,0 +1,90 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<xheader></xheader>
+<!--111111111111111111111111111111111111111111111111普通用户和管理员页面-->
+<div>
+			<!--ng-if="administer"判断是否为管理员-->
+			<div class="clearfix">
+					<div class="tubiao1">
+	             	<!--返回-->
+		                <a onclick="javascript:history.back();">&nbsp;&lt;返回</a>  
+	               </div>
+			       <div class="tubiao2">
+				         <!--<a ng-hide="isshow" href="#" ng-click="updata()">修改信息&nbsp;&nbsp;</a>
+				         <a ng-show="isshow" href="#" ng-click="savedata()">保存&nbsp;&nbsp;</a>-->
+				         <a ng-if="administer" ng-href="#/mainpage/adddata" ng-click="dataadd()" class="add1">添加&nbsp;&nbsp;</a>
+			       </div>
+			</div>
+			
+			<!--<a ng-href="#"><img class="data_add_size" src="img/1e5f72a294a7a1b6.png" ng-click="printadd()"/></a>-->
+			<!--添加和搜索部分-->
+			<div class="data_nav clearfix">
+				<select class="data_navsearch1" name="searcher" ng-model="typeid1">
+					 <option value="">所有</option>
+					 <option ng-repeat="seacher in seachers" value="{{seacher}}">{{seacher}}</option>
+					
+				</select>
+				<span><input class="sinput2" type="search" id="input" placeholder="请输入查询内容" ng-model="searchName" ng-focus="search()"/></span>
+				<span class="data_navsearch2" ng-click="searcher()">搜       索<span>	 					
+			</div>
+			<!--添加按钮-->
+			
+			<!--数据表格的部分-->
+			<table border="0." cellspacing="0" cellpadding="0" class="data_size">
+				<!--ng-if="administer"判断是否为管理员-->
+			    <!--<th class="aa">选择</th>-->
+				<th class="aa">序号</th>
+				<th class="aa">仪器名称</th>
+				<th class="aa">存放地点</th>
+				<th class="aa" ng-if="ptyh">详情</th>
+				<th class="aa" ng-if="administer">编辑</th>
+				<th class="aa" ng-if="administer">删除</th>
+				<!--局部查询方法-->
+				<!--<tr ng-repeat="datacontent in datacontents|filter:searchName" class="aa">-->
+					<!--在数据库里查询-->
+					<tr ng-href="#/mainpage/editor/{{datacontent.id}}" ng-repeat="datacontent in datacontents" class="aa" id="ishide{{datacontent.id}}">
+						<!--<td><input type="checkbox"></td>-->
+						<td class="aa">{{datacontent.id}}</td>
+						<td>{{datacontent.name}}</td>
+						<td>{{datacontent.place}}</td>
+						
+						<td ng-if="ptyh"><a ng-href="#/mainpage/editor/{{datacontent.id}}">详情</a></td>
+					    <!-- <td  ng-click="ewm(datacontent.id)">二维码</td> -->	
+						<td ng-if="administer">
+							  <a ng-href="#/mainpage/editor/{{datacontent.id}}" style="z-index: 99;">编辑</a>
+						</td>
+						<td ng-if="administer" ng-click="datadelet(datacontent.id)">删除</td>
+					</tr>
+			</table>
+			<!--二维码生成的部分-->
+				   <!--<table class="ewmplace" border="1" cellspacing="0" cellpadding="0" ng-repeat="ewm in ewms">
+				     	<tr><td rowspan="4" class="ewmplaceewm">二维码</td><td class="ewmplacetd1">名称</td><td class="ewmplacetd">{{ewm.name}}</td></tr>
+				     	<tr><td class="ewmplacetd1">存放地点asd</td><td class="ewmplacetd">{{ewm.place}}</td></tr>
+				     	<tr><td class="ewmplacetd1">型号</td><td class="ewmplacetd">{{ewm.xh}}</td></tr>
+				     	<tr><td class="ewmplacetd1">序号</td><td class="ewmplacetd">{{ewm.id}}</td></tr> 
+				     	<tr><td class="ewmplacesc" rowspan="5" ng-click="ewmsc($index)">删除</td><td class="ewmplacetd1">序号</td><td class="ewmplacetd">{{ewm.bh}}</td></tr>     		
+				   </table>-->
+			<!--分页-->
+			<div class="turnPage">
+			<!--	<span ng-click="fisrt()">首页</span>-->
+			    <span ng-click="previous()">上一页</span>
+			    <span ng-click="next()">下一页</span> 
+			    
+			    <input type="number" ng-model="currentPages" class="pageNum" value="" />
+			    <!--<input type="text" ng-model="currentPage" class="pageNum">-->
+			    <span ng-click="goToPage()">跳转</span>
+			    <span> 第<span id="x"> </span>页</span>
+			    <span class="totalPages">共{{allPage}}页</span>
+			</div>
+</div>
+
+   <div ui-view=""></div>
+</body>
+</html>
+
+

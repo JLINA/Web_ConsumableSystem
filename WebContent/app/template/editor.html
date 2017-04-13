@@ -1,0 +1,110 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<xheader></xheader>
+	
+    <!--保存ng-if="isgly"判断是否为管理员-->
+    <div class="tubiao1">
+	<!--返回-->
+	     <a onclick="javascript:history.back();">&nbsp;&lt;返回</a>  
+    </div>
+    <div class="tubiao2" ng-if="isgly">
+         <a ng-hide="isshow" href="#" ng-click="updata()">修改信息&nbsp;&nbsp;</a>
+         <a ng-show="isshow" href="#" ng-click="savedata()">保存&nbsp;&nbsp;</a>
+    </div>
+   
+<form class="bjcenter" ng-repeat="content in contents">
+	 <p>
+	 	<label for="name">序号:</label>
+        <input type="text" disabled="true" ng-model="content.id"/>
+	 </p>
+     <p>
+     	<label for="name">编号:</label>
+        <input type="text" disabled="true" ng-model="content.numbers" class="in"/>
+     </p>  
+     <p>
+     	<label for="name">仪器名称:</label>
+        <input type="text" disabled="true" ng-model="content.name" class="in"/>
+     </p>   
+     <p>
+     	<label for="name">型号:</label>
+        <input type="text" disabled="true" ng-model="content.type" class="in"/>
+     </p>  
+  
+    
+     
+     <p>
+     	 <label for="name">规格:</label>
+        <input  type="text" disabled="true" ng-model="content.standstandard" class="in"/>
+     </p>  
+     <p>
+     	 <label for="name">单价:</label>
+        <input type="text" disabled="true" ng-model="content.price" class="in"/>
+     </p>   
+     <p>
+     	<label for="name">厂家:</label>
+        <input type="text" disabled="true" ng-model="content.factory" class="in"/>
+     </p>   
+     <p>
+     	 <label for="name">出厂日期:</label>
+         <input type="date" disabled="true" ng-model="d1" class="in"/>
+     </p> 
+     <p>
+     	 <label for="name">购买日期:</label>
+        <input type="date" disabled="true" ng-model="d2" class="in"/>
+     </p>
+     <p>
+     	 <label for="name">入库时间:</label>
+        <input type="date" disabled="true" ng-model="d3"/>
+     </p>   
+       
+     <p>
+     	<label for="name">使用情况:</label>
+        <input type="text" disabled="true" ng-model="content.usesituation" class="in"/>
+     </p>
+     <p>
+     	<label for="name">是否缺标签:</label>
+        <input type="text" disabled="true" ng-model="content.remarks" class="in"/>
+     </p>    
+      
+     <p ng-show="numbers">
+     	<label for="name">已用数量:</label>
+        <input type="text"  ng-model="content.count" class="in"/>
+     </p>
+     
+     <p ng-show="numbers">
+     	<label for="name">剩余数量:</label>
+        <input type="text"  ng-model="content.surplus" class="in"/>
+     </p>
+      <p>
+     	 <label for="name">存放地点:</label>
+        <input type="text" disabled="true" ng-model="content.place" class="in"/>
+     </p>
+      <div>
+     	 <label for="name">类型:</label>
+		  <input  type="text" disabled="true" ng-model="content.typeid" class="in" ng-show="typeis"/>	 
+		  <select ng-hide="typeis"  id="type2" ng-click="xgsj()">
+					 <option value="">所有</option>
+					 <option ng-repeat="seacher in seachers"  value="{{seacher}}">{{seacher}}</option>	
+		  </select>
+		 <select ng-hide="typeis"  id="type3">
+					 <option ng-repeat="seacher in seachers1"  value="{{seacher}}">{{seacher}}</option>	
+		  </select>
+		   
+     </div>  
+     <p class="isgly">
+	     <p style="width:70%;" ng-show="numbers">
+	     	<label for="name">数量加减:</label>
+	        <input style="width:2rem;" type="number"  id="num1"/>
+	        <button ng-click="inku()">确定</button>    
+	     </p>
+    </p>
+</form>
+
+ <div ui-view=""></div>
+</body>
+</html>

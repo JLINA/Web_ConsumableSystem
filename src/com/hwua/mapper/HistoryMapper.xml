@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hwua.dao.HistoryMapperDao" >
+  <resultMap id="BaseResultMap" type="com.hwua.pojo.History" >
+    <id column="ID" property="id" javaType="java.lang.Long" />
+    <result column="TIMES" property="times" javaType="java.lang.String" />
+    <result column="USER_ID" property="userId" javaType="java.lang.Long" />
+    <result column="OPERATE" property="operate" javaType="java.lang.String" />
+    <result column="OPERATEOBJECT" property="operateobject" javaType="java.lang.String" />
+  </resultMap>
+  <sql id="base_list">
+  ID,TIMES,USER_ID,OPERATE,OPERATEOBJECT
+  </sql>
+  <insert id="insert" parameterType="com.hwua.pojo.History">
+  <selectKey keyColumn="id" keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+ 		select HISTORY_SEQ.nextval from dual
+ 	</selectKey>
+  INSERT INTO HISTORY( ID,TIMES,USER_ID,OPERATE,OPERATEOBJECT)
+  VALUES
+  (
+  #{id},#{times},#{userId},#{operate},#{operateobject}
+  )
+  
+  </insert>
+  <!-- 查找 -->
+   <select id="select" parameterType="com.hwua.pojo.SelectAll" resultMap="BaseResultMap">
+  
+  select <include refid="base_list"/>
+  from(
+  select a1.*, rownum rwn from (SELECT * FROM HISTORY  <include refid="Base_if"/>) a1   
+   <include refid="if1"></include>) 
+    <include refid="if2"></include>
+  </select>
+  <sql id="if1">
+  <if test="max !=null and max !='' and max !=0">where  rownum<![CDATA[ <=]]>  #{max}</if>
+  </sql>
+  <sql id="if2">
+  <if test="max !=null and max !='' and max !=0">where rwn &gt; #{min}</if>
+  </sql>
+   <sql id="Base_if" >
+   <if test="str !=null and str !='' and str != '0' ">
+    where USER_ID=#{str}
+    </if> 
+  </sql>
+  <select id="selectcount" parameterType="com.hwua.pojo.SelectAll" resultType="java.lang.Long">
+  SELECT count(*) FROM HISTORY <include refid="Base_if"/>
+  </select>
+  
+</mapper>

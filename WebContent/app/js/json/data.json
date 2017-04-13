@@ -1,0 +1,32 @@
+[
+    {
+        "id":"1",
+        "username":"79001900",
+        "password":"多用仪",
+        "role":"DY-A",
+        "phone":"51214442",
+        "createtime":"编辑",
+        "lasttime":"二维码",
+        "state":"详情",
+        "sc":"删除"
+    },{"id":"2",
+        "username":"79001900",
+        "password":"多用仪",
+        "role":"DY-A",
+        "phone":"51214442",
+        "createtime":"编辑",
+        "lasttime":"二维码",
+        "state":"详情",
+        "sc":"删除"
+    },{
+        "id":"3",
+        "username":"79001900",
+        "password":"多用仪",
+        "role":"DY-A",
+        "phone":"51214442",
+        "createtime":"编辑",
+        "lasttime":"二维码",
+        "state":"详情",
+        "sc":"删除"
+    }
+]

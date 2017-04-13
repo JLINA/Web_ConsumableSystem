@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<xheader></xheader>
+<div class="tubiao1">
+	<!--返回-->
+	<a onclick="javascript:history.back();">&nbsp;&lt;返回</a>  
+</div>
+<div class="tubiao2">
+     <a  href="#" ng-click="savedata()">保存&nbsp;&nbsp;</a>
+</div>
+<form class="bjcenter">
+	 
+     <p>
+     	<label for="name">编号:</label>
+        <input type="text"  ng-model="numbers" class="in"/>
+     </p>  
+     <p>
+     	<label for="name">仪器名称:</label>
+        <input type="text"  ng-model="name" class="in"/>
+     </p>   
+     <p>
+     	<label for="name">型号:</label>
+     	<input type="text"  ng-model="type" class="in"/> 
+     </p>   
+      <div>
+     	 <label for="name">类型:</label>
+		 <select ng-model="typeia1" ng-click="typeids1()">
+					 <option value="">所有</option>
+					 <option ng-repeat="seacher in seachers"  value="{{seacher}}">{{seacher}}</option>	
+		  </select>
+		   <select ng-model="typeia" >
+					 <option  ng-repeat="seacher in seachers2"  value="{{seacher}}">{{seacher}}</option>	
+		  </select>
+     </div>    
+     <p>
+     	 <label for="name">规格:</label>
+        <input type="text"  ng-model="standstandard" class="in"/>
+     </p>  
+     <p>
+     	 <label for="name">单价:</label>
+        <input type="text"  ng-model="price" class="in"/>
+     </p>   
+     <p>
+     	<label for="name">厂家:</label>
+        <input type="text"  ng-model="factory" class="in"/>
+     </p>   
+     <p>
+     	 <label for="name">出厂日期:</label>
+        <input type="text"  ng-model="leavefactorydate" class="in"/>
+     </p> 
+     <p>
+     	 <label for="name">购买日期:</label>
+        <input type="text"  ng-model="buydate" class="in"/>
+     </p>
+       
+     <p>
+     	 <label for="name">存放地点:</label>
+        <input type="text"  ng-model="place" class="in"/>
+     </p>   
+     <p>
+     	<label for="name">使用情况:</label>
+        <input type="text"  ng-model="usesituation" class="in"/>
+     </p>
+     <p>
+     	<label for="name">是否缺标签:</label>
+        <input type="text"  ng-model="remarks" class="in"/>
+     </p>    
+     <p>
+     	<label for="name">剩余数量:</label>
+        <input type="text"  ng-model="surplus" class="in"/>
+     </p>
+
+</form>
+ <div ui-view=""></div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<xheader></xheader>
+<div class="tubiao1">
+	<!--返回-->
+	<a onclick="javascript:history.back();">&nbsp;&lt;返回</a>  
+</div>
+<form class="bjcenter" ng-repeat="superxqy in superxqys">
+	 <p>
+	 	<label for="name">序号</label>
+        <input type="text" disabled="true" ng-model="superxqy.id"/>
+	 </p>
+     <p>
+     	<label for="name">用户名</label>
+        <input type="text" disabled="true" ng-model="superxqy.username" class="in"/>
+     </p>  
+     <p>
+     	<label for="name">密码</label>
+        <input type="text" disabled="true" ng-model="superxqy.password" class="in"/>
+     </p>   
+     <p>
+     	<label for="name">身份权限</label>
+        <input type="text" disabled="true" ng-model="superxqy.role" class="in"/>
+     </p>   
+     <p>
+     	 <label for="name">电话</label>
+        <input type="text" disabled="true" ng-model="superxqy.phone" class="in"/>
+     </p>   
+     <p>
+     	 <label for="name">创建时间</label>
+        <input type="text" disabled="true" ng-model="superxqy.createtime" class="in"/>
+     </p>  
+     <p>
+     	 <label for="name">上次登录时间</label>
+        <input type="text" disabled="true" ng-model="superxqy.lasttime" class="in"/>
+     </p>   
+     <p>
+     	<label for="name">使用状态</label>
+        <input type="text" disabled="true" ng-model="superxqy.state" class="in"/>
+     </p>   
+     
+</form>
+ <div ui-view=""></div>
+</body>
+<ml>
+
+</body>
+</html>

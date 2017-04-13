@@ -1,0 +1,32 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<!--数据采集的背景-->
+
+<div class="weui-tab">
+	    <!--下面的按钮-->
+	    <div  class="weui-tabbar tubiao mainpage_bj_bottom">
+		    <a href="javascript:;" class="weui-tabbar__item" ng-repeat="mainpage2 in mainpages2" ng-click="toggle(mainpage2.id,mainpage2.url)">     
+			      <div class="weui-tabbar__icon">
+			          <img ng-src="{{mainpage2.src}}" alt="">
+			      </div>
+			      <p style="font-weight: 600" class="weui-tabbar__label">{{mainpage2.name}}</p>
+		    </a> 
+	  </div>
+	  <!--<div class="weui-tabbar tubiao mainpage_bj_bottom">
+		    <a href="javascript:;" class="weui-tabbar__item" ng-repeat="mainpage2 in mainpages2" ng-click="toggle(mainpage2.id,mainpage2.url)">     
+			      <div class="weui-tabbar__icon">
+			          <img ng-src="{{mainpage2.src}}" alt="">
+			      </div>
+			      <p style="font-weight: 600" class="weui-tabbar__label">{{mainpage2.name}}</p>
+		    </a> 
+	  </div>-->
+</div>
+<div ui-view=""></div>
+</body>
+</html>

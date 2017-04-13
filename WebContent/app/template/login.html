@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html ng-app="dataApp">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+		<title></title>
+</head><body>
+
+<div class="logonregister">
+        <xheader></xheader>
+		<div class="weui-tab">
+			<div class="weui-navbar weui-fixed">
+				<div class="weui-navbar__item weui-bar__item_on">
+					<a class="weui-a logreg">登录注册</a>
+				</div>
+			</div>
+			<div class="weui-tab__panel">
+		
+			</div>
+		</div>
+		<article class="loginregister">
+			<section>
+				<!--利用真假来给div添加class-->
+				<div  ng-class="{'border':page1}"><a class="lorresize" href="#/mainpage/login">用户登录</a></div>
+				<div  ng-class="{'border':page2}"><a class="lorresize" href="#/mainpage/register">用户注册</a></div>
+			</section>
+			<!--登录-->
+			<div>
+				<div class="weui-cells weui-cells_form fontsize" style="margin-top: 2.176471em;">
+					<div class="weui-cell">
+						<div class="weui-cell__hd"><label ng-class="{'inputcolor':boolpassword1}" class="weui-label textright">账号</label></div>
+						<div class="weui-cell__bd">
+							<input ng-model="username" ng-class="{'inputborder':boolname1}" class="weui-input" type="text" placeholder="请输入用户名">
+						</div>
+					</div>
+					<div class="weui-cell">
+						<div class="weui-cell__hd"><label ng-class="{'inputcolor':boolpassword1}" class="weui-label textright">密码</label></div>
+						<div class="weui-cell__bd">
+							<input ng-model="password" ng-class="{'inputborder':boolpassword1}" class="weui-input weui-password" type="password" placeholder="请输入密码">
+						</div>
+					</div>
+					<div class="weui-cell">
+						<div class="weui-cell__hd"><label ng-class="{'inputcolor':code1}" class="weui-label textright">验证码</label></div>
+						<div class="weui-cell__bd">
+							<input ng-model="code" ng-class="{'inputcolor':code1}" class="weui-input weui-password" type="text" placeholder="请输入验证码">
+						</div>
+					</div>
+					<div class="weui-cell">
+					    <img ng-class="{'inputborder':boolname}" ng-click="newcode()" id="imgId" src="img/baocun.png" alt="" />
+					    <span><a href="#" ng-click="newcode()" style="font-size: 1.2rem;">看不清楚？换另一张</a></span>
+				    </div>
+				</div>
+				
+				<div class="weui-btn-area">
+					<a ng-click="login()" class="weui-btn weui-btn_primary" id="showTooltips">登录</a>
+				</div>
+			</div>
+			<!--注册-->
+			
+		</article>
+</div>
+<div ui-view=""></div>
+<!--<style>
+	.loginregister {
+		background-color: #f8f8f8;
+		position: relative;
+		height: 100%;
+	}
+	
+	.loginregister section {
+		display: flex;
+	}
+	
+	.loginregister section div {
+		flex: 1;
+		text-align: center;
+		line-height: 40px;
+		height: 40px;
+	}
+	
+	.loginregister .border {
+		border-bottom: 2px solid #1AAD19;
+	}
+</style>-->
+	</body>
+</html>
