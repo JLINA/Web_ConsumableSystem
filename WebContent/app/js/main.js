@@ -1,5 +1,4 @@
 var app=angular.module("dataApp",['ui.router','ng.post','data.controller','data.service','data.directive']);
-//配置路由
 app.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 	   $stateProvider.state('mainpage',{
 	   	     url:'/mainpage',
