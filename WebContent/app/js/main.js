@@ -41,7 +41,7 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRo
 	   	     templateUrl:'template/adddata.html',
 	   	     controller:'adddataCtrl'
 	   })
-	   //超级管理员详情页面
+	   //超级管理员详情页面<hahhaahhahaahhßß>
 	   .state('mainpage.superxq',{
 	   	     url:'/superxq/:id',
 	   	     templateUrl:'template/superxq.html',
